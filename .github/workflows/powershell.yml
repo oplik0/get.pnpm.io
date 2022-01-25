@@ -1,4 +1,4 @@
-name: Powershell
+name: PowerShell
 
 on:
   - push
