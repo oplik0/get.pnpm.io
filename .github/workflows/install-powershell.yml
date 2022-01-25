@@ -1,0 +1,25 @@
+name: Powershell
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  install:
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+        includes:
+          - os: windows-latest
+            name: Windows
+          - os: ubuntu-latest
+            name: Ubuntu
+          - os: macos-latest
+            name: macOS
+    runs-on: ${{ matrix.os }}
+    name: Powershell on ${{ matrix.name }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run installation script
+        run: powershell -NoProfile -ExecutionPolicy Unrestricted ./install.ps1
+        shell: pwsh
