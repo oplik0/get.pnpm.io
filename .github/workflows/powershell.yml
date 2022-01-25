@@ -1,4 +1,4 @@
-name: PowerShell
+name: Powershell
 
 on:
   - push
@@ -8,20 +8,21 @@ jobs:
   install:
     strategy:
       matrix:
-        runs-on:
-          - macos-latest
-          - ubuntu-latest
-          - windows-latest
+        include:
+          - runs-on: windows-latest
+            os-name: Windows
+          - runs-on: ubuntu-latest
+            os-name: Ubuntu
+          - runs-on: macos-latest
+            os-name: macOS
       fail-fast: false
 
     runs-on: ${{ matrix.runs-on }}
 
+    name: Powershell on ${{ matrix.os-name }}
+
     steps:
       - uses: actions/checkout@v2
-      - name: Run on UN*X
-        run: pwsh install.ps1
-        if: ${{ matrix.runs-on == 'macos-latest' || matrix.runs-on == 'ubuntu-latest' }}
-      - name: Run on Windows
-        run: powershell -NoProfile -ExecutionPolicy Unrestricted ./install.ps1
+      - name: Run installation script
+        run: pwsh -NoProfile -ExecutionPolicy Unrestricted ./install.ps1
         shell: pwsh
-        if: ${{ matrix.runs-on == 'windows-latest' }}
