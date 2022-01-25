@@ -8,18 +8,17 @@ jobs:
   install:
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest]
-        includes:
+        include:
           - os: windows-latest
-            name: Windows
+            os-name: Windows
           - os: ubuntu-latest
-            name: Ubuntu
+            os-name: Ubuntu
           - os: macos-latest
-            name: macOS
+            os-name: macOS
     runs-on: ${{ matrix.os }}
-    name: Powershell on ${{ matrix.name }}
+    name: Powershell on ${{ matrix.os-name }}
     steps:
       - uses: actions/checkout@v2
       - name: Run installation script
-        run: powershell -NoProfile -ExecutionPolicy Unrestricted ./install.ps1
+        run: pwsh -NoProfile -ExecutionPolicy Unrestricted ./install.ps1
         shell: pwsh
