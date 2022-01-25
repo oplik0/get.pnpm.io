@@ -8,15 +8,15 @@ jobs:
   install:
     strategy:
       matrix:
-        include:
-          - os: windows-latest
-            os-name: Windows
-          - os: ubuntu-latest
-            os-name: Ubuntu
-          - os: macos-latest
-            os-name: macOS
-    runs-on: ${{ matrix.os }}
-    name: Powershell on ${{ matrix.os-name }}
+        os:
+          - runs-on: windows-latest
+            name: Windows
+          - runs-on: ubuntu-latest
+            name: Ubuntu
+          - runs-on: macos-latest
+            name: macOS
+    runs-on: ${{ matrix.os.runs-on }}
+    name: Powershell on ${{ matrix.os.name }}
     steps:
       - uses: actions/checkout@v2
       - name: Run installation script

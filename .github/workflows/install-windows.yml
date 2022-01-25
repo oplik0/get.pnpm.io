@@ -23,4 +23,4 @@ jobs:
         if: ${{ matrix.shell != 'sh' }}
       - name: Run installation script
         run: ${{ matrix.shell }} ${{ matrix.script }}
-        shell: ${{ matrix.shell }} {0}
+        shell: pwsh

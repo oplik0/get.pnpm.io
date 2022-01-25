@@ -29,5 +29,4 @@ jobs:
         run: sudo apt-get install -y ${{ matrix.shell }}
         if: ${{ matrix.shell != 'sh' }}
       - name: Run installation script
-        run: ${{ matrix.shell }} ${{ matrix.script }}
-        shell: ${{ matrix.shell }} {0}
+        run: SHELL="$(which ${{ matrix.shell }})" ${{ matrix.shell }} ${{ matrix.script }}
