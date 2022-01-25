@@ -18,6 +18,9 @@ jobs:
           - zsh
         script:
           - install.sh
+        include:
+          - shell: pwsh
+            script: install.ps1
       fail-fast: false
 
     steps:
@@ -26,4 +29,5 @@ jobs:
         run: brew install ${{ matrix.shell }}
         if: ${{ matrix.shell == 'ksh' || matrix.shell == 'dash' }}
       - name: Run installation script
-        run: SHELL="$(which ${{ matrix.shell }})" ${{ matrix.shell }} ${{ matrix.script }}
+        run: ${{ matrix.shell }} ${{ matrix.script }}
+        shell: ${{ matrix.shell }} {0}

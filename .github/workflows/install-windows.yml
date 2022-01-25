@@ -1,4 +1,4 @@
-name: Install on Ubuntu
+name: Install on Windows
 
 on:
   - push
@@ -6,21 +6,14 @@ on:
 
 jobs:
   install:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     strategy:
       matrix:
         shell:
-          - bash
-          - dash
-          - ksh
-          - sh
-          - zsh
+          - pwsh
         script:
-          - install.sh
-        include:
-          - shell: pwsh
-            script: install.ps1
+          - install.ps1
       fail-fast: false
 
     steps:
